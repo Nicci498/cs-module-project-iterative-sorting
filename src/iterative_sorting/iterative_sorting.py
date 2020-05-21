@@ -32,10 +32,37 @@ def bubble_sort(arr):
                 arr[j], arr[j+1] = arr[j+1], arr[j]  
     return arr
 
-
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        j=i
+        while j > 0 and arr[j] < arr[j-1]:
+            arr[j], arr[j-1] = arr[j-1], arr[j]
+            j -=1
 # STRETCH: implement the Count Sort function below
+# requires us to know the max value
+#
 def count_sort(arr, maximum=-1):
-    # Your code here
+    #if arr empty
+    if len(arr) == 0:
+        return arr
+    # if max isnt given
+    if maximum == -1:
+        maximum = max(arr)
+    # make a bunch of buckets (enough for each value 0 - max)
+    buckets = [0 for i in range(maximum + 1)]
 
+    for x in arr:
+        if x < 0:
+            return "Error, negative numbers not allowed in Count Sort"
+        buckets[x] +=1
+
+    # now we have the counts of every value in array
+    # loop through our buckets starting at the smallest index
+    j = 0
+    for i in range(len(buckets)):
+        while buckets[i] > 0:
+            arr[j] = i
+            j += 1
+            buckets[i] -= 1
 
     return arr
